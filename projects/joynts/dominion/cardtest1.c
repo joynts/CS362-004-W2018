@@ -35,9 +35,9 @@ int main() {
     
     printf("Testing: Smity");
     
-    memcpy(stored_game, state, sizeof(struct gameState));
-    playerHandSize = numHandCards(testGame);       // Get hand size.
-    playerActions = testGame->numActions;          // Get initial action amount.
+    memcpy(&stored_game, state, sizeof(struct gameState));
+    playerHandSize = numHandCards(stored_game);       // Get hand size.
+    playerActions = stored_game->numActions;          // Get initial action amount.
     
     handSizeIncrease = 0;
     otherHandIncrease = 0;
@@ -45,43 +45,43 @@ int main() {
     otherDiscardIncrease = 0;
     
     // Set player 1's first card in hand to be smithy card.
-    testGame->hand[testGame->whoseTurn][0] = smithy;
-    smithy_card(testGame, testGame->whoseTurn, 0);         // First card is smithy;
+    testGame->hand[stored_game->whoseTurn][0] = smithy;
+    smithy_card(stored_game, testGame->whoseTurn, 0);         // First card is smithy;
     
-    handSizeIncrease = numHandCards(testGame) - playerHandSize;       // Find amount players hand size increased by.
-    actionDecrease = playerActions - testGame->numActions;
+    handSizeIncrease = numHandCards(stored_game) - playerHandSize;       // Find amount players hand size increased by.
+    actionDecrease = playerActions - stored_game->numActions;
     
     // See if any other players handsize increased, don't include player that played smithy.
     int i = 0;
     for(i = 1; i < numPlayers; i++) {
-        if(testGame->handCount[i] > 0) {
+        if(stored_game->handCount[i] > 0) {
             otherHandIncrease++;
         }
-        if(testGame->deckCount[i] > 10) {
+        if(stored_game->deckCount[i] > 10) {
             otherDeckIncrease++;
         }
-        if(testGame->discardCount[i] > 0) {
+        if(stored_game->discardCount[i] > 0) {
             otherDiscardIncrease++;
         }
     }
     
     // Make sure player has no more smithy cards in hand since we only added one to their hand.
-    for(i = 0; i < numHandCards(testGame); i++) {
-        if(testGame->hand[testGame->whoseTurn][i] == smithy) {        // There is a smithy in hand.
+    for(i = 0; i < numHandCards(stored_gamee); i++) {
+        if(stored_game->hand[stored_game->whoseTurn][i] == smithy) {        // There is a smithy in hand.
             smithyHandCount++;
         }
     }
     
     // Make sure player has no smithy cards in discard pile.
-    for(i = 0; i < testGame->discardCount[testGame->whoseTurn]; i++) {
-        if(testGame->discard[testGame->whoseTurn][i] == smithy) {        // There is a smithy in discard.
+    for(i = 0; i < stored_game->discardCount[stored_game->whoseTurn]; i++) {
+        if(stored_game->discard[stored_game->whoseTurn][i] == smithy) {        // There is a smithy in discard.
             smithyDiscardCount++;
         }
     }
     
     // Make sure player has 1 smithy card in played card pile.
-    for(i = 0; i < testGame->playedCardCount; i++) {
-        if(testGame->playedCards[i] == smithy) {        // There is a smithy in played cards.
+    for(i = 0; i < stored_game->playedCardCount; i++) {
+        if(stored_game->playedCards[i] == smithy) {        // There is a smithy in played cards.
             smithyPlayedCount++;
         }
     }

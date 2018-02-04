@@ -34,22 +34,22 @@ int main() {
     for (j = 0; j < numPlayers; j++){
         
         printf("Test for Player %d \n", j + 1);
-        shuffle(numPlayers, &game_state);
+        shuffle(j, &game_state);
         int compare = 0;
-        assert(stored_game.deckCount[0] == game_state.deckCount[0]);
+        assert(stored_game.deckCount[j] == game_state.deckCount[j]);
     
         int i = 0;
-        for (i = 0; i < stored_game.deckCount[0]; i++) {
-            if (stored_game.deck[0][i] == game_state.deck[0][i])
+        for (i = 0; i < stored_game.deckCount[j]; i++) {
+            if (stored_game.deck[j][i] == game_state.deck[j][i])
             {
-                printf("Equals %d, %d\n", stored_game.deck[0][i], game_state.deck[0][i]);
+                printf("Equals %d, %d\n", stored_game.deck[j][i], game_state.deck[j][i]);
                 compare++;
             }
             else{
-                printf("Not Equal %d, %d\n", stored_game.deck[0][i], game_state.deck[0][i]);
+                printf("Not Equal %d, %d\n", stored_game.deck[j][i], game_state.deck[j][i]);
             }
         }
-        assert(compare != game_state.deckCount[0]);
+        assert(compare != game_state.deckCount[j]);
     }
     printf ("Test passed\n");
     

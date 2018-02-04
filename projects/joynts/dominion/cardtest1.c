@@ -26,7 +26,7 @@ int main() {
     int numPlayers = 2;
     int rand_number = rand() % + 8192;
    struct gameState *game_state = newGame();;
-    struct gameState *testGame = newGame();
+    struct gameState *stored_game = newGame();
     int cards[10] = {adventurer, minion, cutpurse, steward, smithy,
         council_room, village, mine, tribute, ambassador};
     
@@ -67,7 +67,7 @@ int main() {
     }
     
     // Make sure player has no more smithy cards in hand since we only added one to their hand.
-    for(i = 0; i < numHandCards(stored_gamee); i++) {
+    for(i = 0; i < numHandCards(stored_game); i++) {
         if(stored_game->hand[stored_game->whoseTurn][i] == smithy) {        // There is a smithy in hand.
             smithyHandCount++;
         }
@@ -94,7 +94,7 @@ int main() {
         printf("Hand size increased: PASSED");
     }
     
-    if(state->deckCount[state->whoseTurn] == &stored_game->deckCount[&stored_game->whoseTurn]+3) {
+    if(game_state->deckCount[game_state->whoseTurn] == &stored_game->deckCount[&stored_game->whoseTurn]+3) {
         printf("Deck size decreased: PASSED");
     } else {
         printf("Hand size increased: PASSED");
@@ -112,7 +112,7 @@ int main() {
         printf("Buys remained the same: FAILED");
     }
     
-    if(stored_game->coins == state->coins) {
+    if(stored_game->coins == game_state->coins) {
         printf("Coins remained the same: PASSED");
     } else {
         printf("Coins remained the same: FAILED");

@@ -33,14 +33,14 @@ int main() {
     int j = 0;
     for (j = 0; j < numPlayers; j++){
         
-        printf("Test for Player %d", j + 1)
+        printf("Test for Player %d", j + 1);
         shuffle(thisPlayer, &game_state);
  
         assert(stored_game.deckCount[0] == game_state.deckCount[0]);
     
         int i = 0;
         for (i = 0; i < stored_game.deckCount[0]; i++) {
-            if (stored_game.deck[0][i] == G.deck[0][i])
+            if (stored_game.deck[0][i] == game_state.deck[0][i])
             {
                 printf("Equals %d, %d\n", stored_game.deck[0][i], game_state.deck[0][i]);
                 compare++;

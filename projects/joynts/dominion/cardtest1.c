@@ -9,6 +9,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "dominion.h"
+#include <time.h>
 
 int main() {
   // initialize the random funtion

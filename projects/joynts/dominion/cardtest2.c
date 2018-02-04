@@ -11,7 +11,7 @@
 #include "dominion.h"
 #include <time.h>
 
-int village_card(struct gameState *state, int currentPlayer, int handPos)
+int village_card(struct gameState *state, int currentPlayer, int handPos);
 
 int main() {
   // initialize the random funtion

@@ -80,7 +80,7 @@ int main(){
     
     
     
-        while(last < treasure_map){
+        while(last < treasure_map -1){
             game_state.supplyCount[++last] = 0;
             memcpy(&stored_game, &game_state, sizeof(struct gameState));
             if(isGameOver(&game_state) == 1){

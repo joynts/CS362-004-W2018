@@ -34,7 +34,7 @@ int main() {
         for (i = 0; i <= deckSize; i++){
         
             memcpy(&stored_game, &game_state, sizeof(struct gameState));
-            printf("There are %d cards remaining.\n", G.deckCount[j]);
+            printf("There are %d cards remaining.\n", game_state.deckCount[j]);
         
             // make sure that the drawCard function works
             if (drawCard(j, &game_state) == 0)

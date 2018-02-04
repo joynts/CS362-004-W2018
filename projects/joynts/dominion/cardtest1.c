@@ -58,7 +58,7 @@ int SmithyTEST(struct gameState *post, int handPos){
 	struct gameState preGameState;
 	memcpy(&preGameState, post, sizeof(struct gameState));
 	
-	callSmithyCard(post, player, handPos);
+	smithy_card(post, player, handPos);
 	
 	preGameState.handCount[player] = preGameState.handCount[player] + 2;
 	preGameState.playedCardCount++;

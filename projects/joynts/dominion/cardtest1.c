@@ -94,7 +94,7 @@ int main() {
         printf("Hand size increased: PASSED");
     }
     
-    if(game_state->deckCount[game_state->whoseTurn] == &stored_game->deckCount[&stored_game->whoseTurn]+3) {
+    if(game_state->deckCount[game_state->whoseTurn] == stored_game->deckCount[stored_game->whoseTurn]+3) {
         printf("Deck size decreased: PASSED");
     } else {
         printf("Hand size increased: PASSED");

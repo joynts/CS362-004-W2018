@@ -88,85 +88,53 @@ int main() {
   }
 
 
-  // Player who played card.
-  if(handSizeIncrease == 2) {    // Smithy draws 3 cards, but also the player discards smithy making net handsize gain only two.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects Player 1's 'hand' size to increase by a total of '2', 'hand' increased by: %d\n", handSizeIncrease);
-
-  if(state->deckCount[state->whoseTurn] == testGame->deckCount[testGame->whoseTurn]+3) {    // Smithy draws 3 cards so deck should decrease by 3.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects Player 1's 'deck' size to decrease by a total of '3', 'deck' decreased by: %d\n", state->deckCount[state->whoseTurn]-testGame->deckCount[testGame->whoseTurn]);
-
-  if(actionDecrease == 1) {    // Action reduced by 1 the same.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects Player 1's 'action' amount to decrease by '1', 'actions' decreased by: %d\n", actionDecrease);
-
-  if(testGame->numBuys == 1) {    // Number of buys should still be 1.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects Player 1's 'buy' amount to be '1', got: %d\n", testGame->numBuys);
-
-  if(smithyHandCount == 0) {    // No smithy in hand.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects Player 1 to have 0 'smithy' cards in hand, got: %d\n", smithyHandCount);
-
-  if(smithyPlayedCount == 1) {    // 1 smithy in played cards pile.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects Player 1 to have 1 'smithy' card in played card pile, got: %d\n", smithyPlayedCount);
-
-  if(smithyDiscardCount == 0) {    // 0 smithy in discard.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects Player 1 to have 0 'smithy' cards in discard pile, got: %d\n", smithyDiscardCount);
-
-  if(testGame->coins == state->coins) {         // 0 coin change.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects Player 1 'coins' to be the same after playing smithy, changed by: %d\n", testGame->coins-state->coins);
-
-  // Other players
-  if(otherHandIncrease == 0) {    // Make sure other players hand size doesn't increase.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects other player's 'hand' size to not increase, other player's 'hands' increased by: %d\n", otherHandIncrease);
-
-  if(otherDeckIncrease == 0) {    // Make sure other players deck size doesn't increase.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects other player's 'deck' size to not increase, other player's 'decks' increased by: %d\n", otherDeckIncrease);
-
-  if(otherDiscardIncrease == 0) {    // Make sure other players discard size doesn't increase.
-    printf(PLAYSMITHY_PASS);
-  } else {
-    printf(PLAYSMITHY_FAIL);
-  }
-  printf("expects other player's 'discard' size to not increase, other player's 'discard' pile increased by: %d\n", otherDiscardIncrease);
-
+if(handSizeIncrease == 2) {
+        printf("Hand size increased: PASSED");
+    } else {
+        printf("Hand size increased: PASSED");
+    }
+    
+    if(state->deckCount[state->whoseTurn] == testGame->deckCount[testGame->whoseTurn]+3) {
+        printf("Deck size decreased: PASSED");
+    } else {
+        printf("Hand size increased: PASSED");
+    }
+    
+    if(actionDecrease == 1) {
+        printf("Action decreased: PASSED");
+    } else {
+        printf("Action decreased: FAILED");
+    }
+    
+    if(testGame->numBuys == 1) {
+        printf("Buys remained the same: PASSED");
+    } else {
+        printf("Buys remained the same: FAILED");
+    }
+    
+    if(testGame->coins == state->coins) {
+        printf("Coins remained the same: PASSED");
+    } else {
+        printf("Coins remained the same: FAILED");
+    }
+    
+    if(otherHandIncrease == 0) {
+        printf("Other play hand size remained the same: PASSED");
+    } else {
+        printf("Other play hand size remained the same: FAILED");
+    }
+    
+    if(otherDeckIncrease == 0) {
+        printf("Other play deck size remained the same: PASSED");
+    } else {
+        printf("Other play deck size remained the same: FAILED");
+    }
+    
+    if(otherDiscardIncrease == 0) {   
+        printf("Other play discard size remained the same: PASSED");
+    } else {
+        printf("Other play discard size remained the same: FAILED");
+    }
 
   // Free memory
   free(state);

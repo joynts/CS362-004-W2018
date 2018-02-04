@@ -33,7 +33,7 @@ int main() {
         int i = 0;
         for (i = 0; i <= deckSize; i++){
         
-            memcpy(&stored_game, &game_status, sizeof(struct gameState));
+            memcpy(&stored_game, &game_state, sizeof(struct gameState));
             printf("There are %d cards remaining.\n", G.deckCount[j]);
         
             // make sure that the drawCard function works
@@ -74,7 +74,7 @@ int main() {
             }
         
             // make sure the discard pile is the same
-            if (G.discardCount[j] == storeG.discardCount[j])
+            if (game_state.discardCount[j] == stored_game.discardCount[j])
             {
                 printf("Discard pile size: PASSED\n");
             }
@@ -87,6 +87,6 @@ int main() {
         printf ("Test passed\n");
         
     }
-    
+    }
     return 0;
 }

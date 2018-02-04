@@ -22,17 +22,15 @@ int main() {
     int otherDeckIncrease = 0;
     int otherDiscardIncrease = 0;
     
-    // set variables for the main function
-    int numPlayers = 2;
-    int rand_number = rand() % + 8192;
-   struct gameState *game_state = newGame();;
-    struct gameState *stored_game = newGame();
-    int cards[10] = {adventurer, minion, cutpurse, steward, smithy,
-        council_room, village, mine, tribute, ambassador};
     
-    // set the memory and assert that the game initialized
-    memset(&game_state, 128, sizeof(struct gameState));
-    assert(initializeGame(numPlayers, cards, rand_number, &game_state) == 0);
+    int rand_number = rand() % + 8192;
+    int numPlayers = 2;
+    int kingdomCards[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy};
+    int randomSeed = -1;                          // Set randomSeed to less than 0 so it is based off system clock in the initializeGame method.
+    struct gameState *state = newGame();          // Initialize game state.
+    struct gameState *testGame = newGame();
+
+    initializeGame(numPlayers, kingdomCards, randomSeed, state);    // Initialize game with valid game values.
     
     printf("Testing: Smity");
     

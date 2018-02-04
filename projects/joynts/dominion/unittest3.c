@@ -83,10 +83,10 @@ int main() {
             }
         
             discardCard(1, j, &game_state, 0);
-        
+        }
         printf ("Test passed\n");
         
-    }
+    
     }
     return 0;
 }

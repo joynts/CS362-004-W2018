@@ -97,7 +97,7 @@ int main(){
                 printf("Card game state: FAILED/n");
             }
             
-            G.supplyCount[last] = -1;
+            game_state.supplyCount[last] = -1;
         }
     }
     printf("all tests passed!\n");

@@ -27,8 +27,8 @@ int main(){
     printf ("Begin shuffle() testing:\n");
     int k = 0;
     for(k = 0; k < numPlayers; k++){
-       printf("Test for Player %d \n", j + 1);
-    
+       printf("Test for Player %d \n", k + 1);
+        int i = 0;
         for(i = 0; i < treasure_map + 1; i++){
             game_state.supplyCount[i] = -1;
         }
@@ -56,7 +56,7 @@ int main(){
     
         int j = 0;
         for( j = 0; j < 3; j++){
-            G.supplyCount[j] = 0;
+            game_state.supplyCount[j] = 0;
         }
     
         memcpy(&stored_game, &game_state, sizeof(struct gameState));
@@ -99,7 +99,7 @@ int main(){
             
             G.supplyCount[last] = -1;
         }
-    
+    }
     printf("all tests passed!\n");
     return 0;
 }

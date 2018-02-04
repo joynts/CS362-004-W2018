@@ -21,7 +21,7 @@ int main() {
     struct gameState game_state, stored_game;
     int cards[10] = {adventurer, minion, cutpurse, steward, smithy,
         council_room, village, mine, tribute, ambassador};
-    int compare;
+    
     // set the memory and assert that the game initialized
     memset(&game_state, 128, sizeof(struct gameState));
     assert(initializeGame(numPlayers, cards, rand_number, &game_state) == 0);
@@ -33,9 +33,9 @@ int main() {
     int j = 0;
     for (j = 0; j < numPlayers; j++){
         
-        printf("Test for Player %d", j + 1);
+        printf("Test for Player %d \n", j + 1);
         shuffle(numPlayers, &game_state);
- 
+        int compare = 0;
         assert(stored_game.deckCount[0] == game_state.deckCount[0]);
     
         int i = 0;

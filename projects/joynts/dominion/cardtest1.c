@@ -8,14 +8,9 @@
 #include <assert.h>
 #include <string.h>
 #include <unistd.h>
-
 #include "dominion.h"
 
-#define PLAYSMITHY_PASS "playSmithy() PASS: "
-#define PLAYSMITHY_FAIL "playSmithy() FAIL: "
-
-
-void testPlaySmithy() {
+int main() {
   int i = 0;
   int playerHandSize = 0;       // Get hand size.
   int playerActions = 0;
@@ -180,9 +175,5 @@ void testPlaySmithy() {
   free(testGame);
   testGame = 0;
 
-}
-
-int main() {
-  testPlaySmithy();
   return 0;
 }

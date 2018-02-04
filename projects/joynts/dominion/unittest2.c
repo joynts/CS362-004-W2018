@@ -34,7 +34,7 @@ int main() {
     for (j = 0; j < numPlayers; j++){
         
         printf("Test for Player %d", j + 1);
-        shuffle(thisPlayer, &game_state);
+        shuffle(numPlayer, &game_state);
  
         assert(stored_game.deckCount[0] == game_state.deckCount[0]);
     

@@ -11,6 +11,8 @@
 #include "dominion.h"
 
 int main() {
+  // initialize the random funtion
+  srand(time(NULL));
   int i = 0;
   int playerHandSize = 0;       // Get hand size.
   int playerActions = 0;
@@ -26,18 +28,18 @@ int main() {
 
 
   int numPlayers = 2;
-  int kingdomCards[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy};
-  int randomSeed = -1;                          // Set randomSeed to less than 0 so it is based off system clock in the initializeGame method.
-  struct gameState *state = newGame();          // Initialize game state.
+  int cards[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy};
+  int rand_number = rand() % + 8192;                        
+  struct gameState *state = newGame();          
   struct gameState *testGame = newGame();
+  initializeGame(numPlayers, cards, randomSeed, state);    
 
-  initializeGame(numPlayers, kingdomCards, randomSeed, state);    // Initialize game with valid game values.
 
+  printf("Testing: smithy\n");
 
-  printf("\n***** TESTING PLAY SMITHY *****\n");
-
-  memcpy(testGame, state, sizeof(struct gameState));                    // Setup clean test game.
-  // Test playing smithy correctly increments player's handsize.
+  memcpy(testGame, state, sizeof(struct gameState));                   
+  
+  
   playerHandSize = numHandCards(testGame);       // Get hand size.
   playerActions = testGame->numActions;          // Get initial action amount.
 
@@ -46,29 +48,15 @@ int main() {
   otherDeckIncrease = 0;
   otherDiscardIncrease = 0;
 
-  // Set player 1's first card in hand to be smithy card.
   testGame->hand[testGame->whoseTurn][0] = smithy;
-  smithy_card(testGame, testGame->whoseTurn, 0);         // First card is smithy;
+  smithy_card(testGame, testGame->whoseTurn, 0);
 
   handSizeIncrease = numHandCards(testGame) - playerHandSize;       // Find amount players hand size increased by.
   actionDecrease = playerActions - testGame->numActions;
 
-  // See if any other players handsize increased, don't include player that played smithy.
-  for(i = 1; i < numPlayers; i++) {
-    if(testGame->handCount[i] > 0) {
-      otherHandIncrease++;
-    }
-    if(testGame->deckCount[i] > 10) {
-      otherDeckIncrease++;
-    }
-    if(testGame->discardCount[i] > 0) {
-      otherDiscardIncrease++;
-    }
-  }
-
   // Make sure player has no more smithy cards in hand since we only added one to their hand.
   for(i = 0; i < numHandCards(testGame); i++) {
-    if(testGame->hand[testGame->whoseTurn][i] == smithy) {        // There is a smithy in hand.
+    if(testGame->hand[testGame->whoseTurn][i] == smithy) {        
       smithyHandCount++;
     }
   }
@@ -89,59 +77,52 @@ int main() {
 
 
 if(handSizeIncrease == 2) {
-        printf("Hand size increased: PASSED");
+        printf("Hand size increased: PASSED\n");
     } else {
-        printf("Hand size increased: PASSED");
+        printf("Hand size increased: PASSED\n");
     }
     
     if(state->deckCount[state->whoseTurn] == testGame->deckCount[testGame->whoseTurn]+3) {
-        printf("Deck size decreased: PASSED");
+        printf("Deck size decreased: PASSED\n");
     } else {
-        printf("Hand size increased: PASSED");
+        printf("Hand size increased: PASSED\n");
     }
     
     if(actionDecrease == 1) {
-        printf("Action decreased: PASSED");
+        printf("Action decreased: PASSED\n");
     } else {
-        printf("Action decreased: FAILED");
+        printf("Action decreased: FAILED\n");
     }
     
     if(testGame->numBuys == 1) {
-        printf("Buys remained the same: PASSED");
+        printf("Buys remained the same: PASSED\n");
     } else {
-        printf("Buys remained the same: FAILED");
+        printf("Buys remained the same: FAILED\n");
     }
     
     if(testGame->coins == state->coins) {
-        printf("Coins remained the same: PASSED");
+        printf("Coins remained the same: PASSED\n");
     } else {
-        printf("Coins remained the same: FAILED");
+        printf("Coins remained the same: FAILED\n");
     }
     
-    if(otherHandIncrease == 0) {
-        printf("Other play hand size remained the same: PASSED");
+    if(testGame->handCount[1] > 0) {
+        printf("Other play hand size remained the same: PASSED\n");
     } else {
-        printf("Other play hand size remained the same: FAILED");
+        printf("Other play hand size remained the same: FAILED\n");
     }
     
-    if(otherDeckIncrease == 0) {
-        printf("Other play deck size remained the same: PASSED");
+    if(testGame->deckCount[1] > 10) {
+        printf("Other play deck size remained the same: PASSED\n");
     } else {
-        printf("Other play deck size remained the same: FAILED");
+        printf("Other play deck size remained the same: FAILED\n");
     }
     
-    if(otherDiscardIncrease == 0) {   
-        printf("Other play discard size remained the same: PASSED");
+    if(testGame->discardCount[1] > 0) {   
+        printf("Other play discard size remained the same: PASSED\n");
     } else {
-        printf("Other play discard size remained the same: FAILED");
+        printf("Other play discard size remained the same: FAILED\n");
     }
-
-  // Free memory
-  free(state);
-  state = 0;
-
-  free(testGame);
-  testGame = 0;
 
   return 0;
 }

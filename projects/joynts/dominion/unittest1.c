@@ -37,7 +37,7 @@ int main() {
         assert(initializeGame(numPlayers, cards, rand_number, &game_state) == 0);
         
         // hand card test
-        printf("Player %d hand card cost\n", i );
+        printf("Player %d hand card cost.\n", i+1 );
         rand_hand = rand() % MAX_HAND;
         game_state.handCount[i] = rand_hand;
         
@@ -47,10 +47,11 @@ int main() {
             rand_card = rand() % 64;
             game_state.hand[i][j] = rand_card;
             assert(getCost(game_state.hand[i][j]) == getDominionCardCost(rand_card));
+            printf("PASSED");
         }
         
         // deck card test
-        printf("Player %d deck card cost\n", i );
+        printf("Player %d deck card cost\n", i+1 );
         rand_deck = rand() % MAX_DECK;
         game_state.deckCount[i] = rand_deck;
         
@@ -59,6 +60,7 @@ int main() {
             rand_card = rand() % 64;
             game_state.deck[i][j] = rand_card;
             assert(getCost(game_state.deck[i][j]) == getDominionCardCost(rand_card));
+            printf("PASSED");
         }
         
     }

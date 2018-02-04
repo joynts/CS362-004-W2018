@@ -61,7 +61,7 @@ int main(){
     
         memcpy(&stored_game, &game_state, sizeof(struct gameState));
     
-        if(isGameOver(&G) == 1){
+        if(isGameOver(&game_state) == 1){
             printf("First Three card are empty: PASSED/n");
         }
         else{
@@ -75,7 +75,7 @@ int main(){
         else{
             printf("Card game state: FAILED/n");
         }
-        last = province;
+        int last = province;
         game_state.supplyCount[2] = -1;
     
     

@@ -23,7 +23,7 @@ int main() {
     struct gameState game_state;
     int numPlayers = 2;
     int rand_number = rand() % + 8192;
-    int rand_hand,
+    int rand_hand;
     int rand_deck;
     int rand_card;
     
@@ -45,14 +45,14 @@ int main() {
         for (j = 0; j < rand_hand; j++)
         {
             rand_card = rand() % 64;
-            G.hand[p][j] = rand_card;
-            assert(getCost(G.hand[i][j]) == getRealCost(randomCard));
+            game_state.hand[i][j] = rand_card;
+            assert(getCost(game_state.hand[i][j]) == getRealCost(randomCard));
         }
         
         // deck card test
         printf("Player %d deck card cost\n", i );
         rand_deck = rand() % MAX_DECK;
-        game.deckCount[p] = rand_deck;
+        game_state.deckCount[i] = rand_deck;
         
         for (j = 0; j < rand_deck; j++)
         {

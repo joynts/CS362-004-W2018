@@ -710,7 +710,8 @@ int council_room_card(struct gameState *state, int currentPlayer, int handPos)
 {
     //+3 Cards
     int i = 0;
-    for (i = 0; i < 0; i++)
+//for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++)
     {
         drawCard(currentPlayer, state);
     }

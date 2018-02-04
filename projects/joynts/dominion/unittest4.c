@@ -15,6 +15,7 @@ int main(){
     // set variables for the main function
     int numPlayers = 2;
     struct gameState game_state, stored_game;
+    int rand_number = rand() % + 8192;
     int cards[10] = {adventurer, minion, cutpurse, steward, smithy,
         council_room, village, mine, tribute, ambassador};
     

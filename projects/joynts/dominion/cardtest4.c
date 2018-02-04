@@ -26,7 +26,7 @@ int main() {
   struct gameState *testGame = newGame();
   initializeGame(numPlayers, cards, rand_number, state);    
 
-  printf("Testing: village\n");
+  printf("Testing: adventurer\n");
 
   memcpy(testGame, state, sizeof(struct gameState));                   
   

@@ -24,7 +24,7 @@ int main() {
   int rand_number = rand() % + 8192;                        
   struct gameState *state = newGame();          
   struct gameState *testGame = newGame();
-  initializeGame(numPlayers, cards, randomSeed, state);    
+  initializeGame(numPlayers, cards, rand_number, state);    
 
   printf("Testing: smithy\n");
 
@@ -38,6 +38,7 @@ int main() {
   smithy_card(testGame, testGame->whoseTurn, 0);
 
   // Make sure player has no more smithy cards in hand since we only added one to their hand.
+  int i = 0;
   for(i = 0; i < numHandCards(testGame); i++) {
     if(testGame->hand[testGame->whoseTurn][i] == smithy) {        
       smithyHandCount++;

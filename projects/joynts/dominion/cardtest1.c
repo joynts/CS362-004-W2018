@@ -35,7 +35,7 @@ int main() {
     
     printf("Testing: Smity");
     
-    memcpy(testGame, state, sizeof(struct gameState));
+    memcpy(stored_game, state, sizeof(struct gameState));
     playerHandSize = numHandCards(testGame);       // Get hand size.
     playerActions = testGame->numActions;          // Get initial action amount.
     
@@ -52,6 +52,7 @@ int main() {
     actionDecrease = playerActions - testGame->numActions;
     
     // See if any other players handsize increased, don't include player that played smithy.
+    int i = 0;
     for(i = 1; i < numPlayers; i++) {
         if(testGame->handCount[i] > 0) {
             otherHandIncrease++;

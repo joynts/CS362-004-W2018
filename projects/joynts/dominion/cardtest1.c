@@ -35,7 +35,7 @@ int main() {
     
     printf("Testing: Smity");
     
-    memcpy(&stored_game, state, sizeof(struct gameState));
+    memcpy(&stored_game, game_state, sizeof(struct gameState));
     playerHandSize = numHandCards(&stored_game);       // Get hand size.
     playerActions = &stored_game->numActions;          // Get initial action amount.
     

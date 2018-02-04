@@ -14,7 +14,6 @@
 int main(){
     // set variables for the main function
     int numPlayers = 2;
-    int rand_number = rand() % + 8192;
     struct gameState game_state, stored_game;
     int cards[10] = {adventurer, minion, cutpurse, steward, smithy,
         council_room, village, mine, tribute, ambassador};
@@ -46,10 +45,10 @@ int main(){
     
         // check game state
         if(memcmp(&stored_game, &game_state, sizeof(struct gameState)) == 0){
-            printf("Providence games state: PASSED/n");
+            printf("Providence games state: PASSED\n");
         }
         else{
-            printf("Providence games state: PASSED/n");
+            printf("Providence games state: PASSED\n");
         }
         
         game_state.supplyCount[province] = 1;
@@ -62,18 +61,18 @@ int main(){
         memcpy(&stored_game, &game_state, sizeof(struct gameState));
     
         if(isGameOver(&game_state) == 1){
-            printf("First Three card are empty: PASSED/n");
+            printf("First Three card are empty: PASSED\n");
         }
         else{
-            printf("First Three card are empty: FAILED/n");
+            printf("First Three card are empty: FAILED\n");
         }
     
         // make sure that game state hasn't changed
         if(memcmp(&stored_game, &game_state, sizeof(struct gameState)) == 0){
-            printf("Card game state: PASSED/n");
+            printf("Card game state: PASSED\n");
         }
         else{
-            printf("Card game state: FAILED/n");
+            printf("Card game state: FAILED\n");
         }
         int last = province;
         game_state.supplyCount[2] = -1;
@@ -84,22 +83,22 @@ int main(){
             game_state.supplyCount[++last] = 0;
             memcpy(&stored_game, &game_state, sizeof(struct gameState));
             if(isGameOver(&game_state) == 1){
-                printf("Treasure_map 3 cards: PASSED/n");
+                printf("Treasure_map 3 cards: PASSED\n");
             }
             else{
-                printf("Treasure_map 3 cards: FAILED/n");
+                printf("Treasure_map 3 cards: FAILED\n");
             }
             // make sure game state is the same
             if(memcmp(&stored_game, &game_state, sizeof(struct gameState)) == 0){
-                printf("Card game state: PASSED/n");
+                printf("Card game state: PASSED\n");
             }
             else{
-                printf("Card game state: FAILED/n");
+                printf("Card game state: FAILED\n");
             }
             
             game_state.supplyCount[last] = -1;
         }
     }
-    printf("all tests passed!\n");
+    printf("All tests passed!\n");
     return 0;
 }

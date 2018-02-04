@@ -46,7 +46,7 @@ int main() {
         {
             rand_card = rand() % 64;
             game_state.hand[i][j] = rand_card;
-            assert(getCost(game_state.hand[i][j]) == getRealCost(randomCard));
+            assert(getCost(game_state.hand[i][j]) == getDominionCardCost(randomCard));
         }
         
         // deck card test
@@ -57,7 +57,7 @@ int main() {
         for (j = 0; j < rand_deck; j++)
         {
             rand_card = rand() % 64;
-            G.deck[i][j] = rand_card;
+            game_state.deck[i][j] = rand_card;
             assert(getCost(G.deck[i][j]) == getDominionCardCost(randomCard));
         }
         

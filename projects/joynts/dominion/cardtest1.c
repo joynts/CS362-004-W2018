@@ -25,7 +25,8 @@ int main() {
     // set variables for the main function
     int numPlayers = 2;
     int rand_number = rand() % + 8192;
-    struct gameState game_state, stored_game;
+   struct gameState *game_state = newGame();;
+    struct gameState *testGame = newGame();
     int cards[10] = {adventurer, minion, cutpurse, steward, smithy,
         council_room, village, mine, tribute, ambassador};
     
@@ -35,7 +36,7 @@ int main() {
     
     printf("Testing: Smity");
     
-    memcpy(&stored_game, game_state, sizeof(struct gameState));
+    memcpy(stored_game, game_state, sizeof(struct gameState));
     playerHandSize = numHandCards(stored_game);       // Get hand size.
     playerActions = stored_game->numActions;          // Get initial action amount.
     

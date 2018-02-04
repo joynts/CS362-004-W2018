@@ -39,7 +39,7 @@ int main() {
   int cardDrawn = rand() % + 64;
   int temphand[rand() % + 64];
   int z = rand() % + 64;
-  adventurer_card(testGame, testGame->whoseTurn, 0,drawnTreasure,cardDrawn,temphand,z);
+  adventurer_card(testGame, testGame->whoseTurn,drawnTreasure,cardDrawn,temphand,z);
 
 
 if((numHandCards(testGame) - playerHandSize) == 2) {

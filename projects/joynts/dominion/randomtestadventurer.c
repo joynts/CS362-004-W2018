@@ -28,7 +28,7 @@ int main() {
   printf("Random Testing: adventurer\n");
   
   int x = 0;
-  for(int x = 0; x < 1000; x++){
+  for(x = 0; x < 1000; x++){
     rand_number = rand() % + 8192; 
     initializeGame(numPlayers, cards, rand_number, state);    
     memcpy(testGame, state, sizeof(struct gameState));                   

@@ -42,12 +42,13 @@ int main() {
     playerActions = testGame->numActions;         
  
     testGame->hand[testGame->whoseTurn][0] = adventurer;
-    drawnTreasure = (rand() % + 8) +1; 
+    drawnTreasure = (rand() % + 8) + 2; 
     printf("%d \n", drawnTreasure);
     cardDrawn = rand() % + 8;
     printf("%d \n" ,cardDrawn);
     z = (rand() % + 8) + 2;
     printf("%d \n",z);
+    
     adventurer_card(testGame, testGame->whoseTurn,drawnTreasure,cardDrawn,temphand,z);
 
 

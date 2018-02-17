@@ -24,21 +24,24 @@ int main() {
   int rand_number = rand() % + 8192;                        
   struct gameState *state = newGame();          
   struct gameState *testGame = newGame();
-  initializeGame(numPlayers, cards, rand_number, state);    
+      
+  printf("Random Testing: smithy\n");
 
-  printf("Testing: smithy\n");
-
-  memcpy(testGame, state, sizeof(struct gameState));                   
+  int x = 0;
+  for(x = 0; x < 1000; x++){
+    rand_number = rand() % + 8192;
+    initializeGame(numPlayers, cards, rand_number, state);
+    memcpy(testGame, state, sizeof(struct gameState));                   
   
-  //Set's the inital vairables
-  playerHandSize = numHandCards(testGame);       
-  playerActions = testGame->numActions;         
+    //Set's the inital vairables
+    playerHandSize = numHandCards(testGame);       
+    playerActions = testGame->numActions;         
  
-  testGame->hand[testGame->whoseTurn][0] = smithy;
-  smithy_card(testGame, testGame->whoseTurn, 0);
+    testGame->hand[testGame->whoseTurn][0] = smithy;
+    smithy_card(testGame, testGame->whoseTurn, 0);
 
 
-if((numHandCards(testGame) - playerHandSize) == 2) {
+    if((numHandCards(testGame) - playerHandSize) == 2) {
         printf("Hand size increased: PASSED \n");
     } else {
         printf("Hand size increased: PASSED \n");
@@ -85,6 +88,6 @@ if((numHandCards(testGame) - playerHandSize) == 2) {
     } else {
         printf("Other play discard size remained the same: FAILED \n");
     }
-
+  }
   return 0;
 }

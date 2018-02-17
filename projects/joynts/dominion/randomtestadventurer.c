@@ -27,7 +27,7 @@ int main() {
   int drawnTreasure = (rand() % + 8) +1; 
   int cardDrawn = rand() % + 8;
   int temphand[8];
-  int z = rand() % + 8;
+  int z = (rand() % + 8) + 2;
   
   printf("Random Testing: adventurer\n");
   
@@ -46,7 +46,7 @@ int main() {
     printf("%d \n", drawnTreasure);
     cardDrawn = rand() % + 8;
     printf("%d \n" ,cardDrawn);
-    z = rand() % + 8;
+    z = (rand() % + 8) + 2;
     printf("%d \n",z);
     adventurer_card(testGame, testGame->whoseTurn,drawnTreasure,cardDrawn,temphand,z);
 

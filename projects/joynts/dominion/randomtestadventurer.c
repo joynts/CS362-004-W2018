@@ -24,25 +24,28 @@ int main() {
   int rand_number = rand() % + 8192;                        
   struct gameState *state = newGame();          
   struct gameState *testGame = newGame();
-  initializeGame(numPlayers, cards, rand_number, state);    
-
-  printf("Testing: adventurer\n");
-
-  memcpy(testGame, state, sizeof(struct gameState));                   
   
-  //Set's the inital vairables
-  playerHandSize = numHandCards(testGame);       
-  playerActions = testGame->numActions;         
+  printf("Random Testing: adventurer\n");
+  
+  int x = 0;
+  for(int x = 0; x < 1000; x++){
+    rand_number = rand() % + 8192; 
+    initializeGame(numPlayers, cards, rand_number, state);    
+    memcpy(testGame, state, sizeof(struct gameState));                   
+  
+    //Set's the inital vairables
+    playerHandSize = numHandCards(testGame);       
+    playerActions = testGame->numActions;         
  
-  testGame->hand[testGame->whoseTurn][0] = adventurer;
-  int drawnTreasure = rand() % + 64; 
-  int cardDrawn = rand() % + 64;
-  int temphand[rand() % + 64];
-  int z = rand() % + 64;
-  adventurer_card(testGame, testGame->whoseTurn,drawnTreasure,cardDrawn,temphand,z);
+    testGame->hand[testGame->whoseTurn][0] = adventurer;
+    int drawnTreasure = rand() % + 64; 
+    int cardDrawn = rand() % + 64;
+    int temphand[rand() % + 64];
+    int z = rand() % + 64;
+    adventurer_card(testGame, testGame->whoseTurn,drawnTreasure,cardDrawn,temphand,z);
 
 
-if((numHandCards(testGame) - playerHandSize) == 2) {
+  if((numHandCards(testGame) - playerHandSize) == 2) {
         printf("Hand size increased: PASSED \n");
     } else {
         printf("Hand size increased: PASSED \n");
@@ -89,6 +92,6 @@ if((numHandCards(testGame) - playerHandSize) == 2) {
     } else {
         printf("Other play discard size remained the same: FAILED \n");
     }
-
+  }
   return 0;
 }

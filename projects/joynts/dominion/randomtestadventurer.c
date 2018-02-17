@@ -26,7 +26,7 @@ int main() {
   struct gameState *testGame = newGame();
   int drawnTreasure = (rand() % + 8) +1; 
   int cardDrawn = rand() % + 8;
-  int temphand[rand() % + 8];
+  int temphand[8];
   int z = rand() % + 8;
   
   printf("Random Testing: adventurer\n");
@@ -46,8 +46,6 @@ int main() {
     printf("%d \n", drawnTreasure);
     cardDrawn = rand() % + 8;
     printf("%d \n" ,cardDrawn);
-    temphand[rand() % + 8];
-    printf("%d \n",temphand);
     z = rand() % + 8;
     printf("%d \n",z);
     adventurer_card(testGame, testGame->whoseTurn,drawnTreasure,cardDrawn,temphand,z);

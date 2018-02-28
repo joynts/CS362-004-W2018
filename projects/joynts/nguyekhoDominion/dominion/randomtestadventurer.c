@@ -11,7 +11,7 @@
 #include "dominion.h"
 #include <time.h>
 
-int adventurer_card(struct gameState *state, int currentPlayer, int drawnTreasure, int cardDrawn, int temphand[], int z);
+int adventurerEffect(struct gameState *state, int currentPlayer, int drawnTreasure, int cardDrawn, int temphand[], int z);
 
 int main() {
   // initialize the random funtion
@@ -49,7 +49,7 @@ int main() {
     z = (rand() % + 8) + 2;
     printf("%d \n",z);
     
-    adventurer_card(testGame, testGame->whoseTurn,drawnTreasure,cardDrawn,temphand,z);
+    adventurerEffect(testGame, testGame->whoseTurn,drawnTreasure,cardDrawn,temphand,z);
 
 
   if((numHandCards(testGame) - playerHandSize) == 2) {

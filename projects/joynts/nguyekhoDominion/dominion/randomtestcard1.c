@@ -11,7 +11,7 @@
 #include "dominion.h"
 #include <time.h>
 
-int smithy_card(struct gameState *state, int currentPlayer, int handPos);
+int smithyEffect(struct gameState *state, int currentPlayer, int handPos);
 
 int main() {
   // initialize the random funtion
@@ -38,7 +38,7 @@ int main() {
     playerActions = testGame->numActions;         
  
     testGame->hand[testGame->whoseTurn][0] = smithy;
-    smithy_card(testGame, testGame->whoseTurn, 0);
+    smithyEffect(testGame, testGame->whoseTurn, 0);
 
 
     if((numHandCards(testGame) - playerHandSize) == 2) {

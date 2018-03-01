@@ -1,0 +1,16 @@
+Scott Joynt
+CS 362
+
+*** Bug Report ***
+
+Adventurer Card - bug found in line 1284 in function adventurerEffect
+
+The line of code "while (drawntreasure <= 2) {" produces an unexpected result. It should only loop the while drawntreasue < 2 
+
+This bug was found in running the card unit test as well as the random test. 
+
+Smity Card - bug found in line 1310  in function smithyEffect
+
+The line of code "(i = 0; i <= 3; i++)" produces an unexpected result. It should only add +3 cards to the hand. 
+
+This bug was found running the card unit test and also the random test.

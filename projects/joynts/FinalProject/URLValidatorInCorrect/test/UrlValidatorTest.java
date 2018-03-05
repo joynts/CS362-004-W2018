@@ -57,6 +57,32 @@ public class UrlValidatorTest extends TestCase {
 		}
 
    }
+
+   public ResultPair URLmaker(int schema_idx, int host_idx, int port_idx, int path_idx, int query_idx, int fragment_idx)
+   {
+	   if ((schema_idx >= testSchemas.length) || (host_idx >= testHosts.length) ||
+			   (port_idx >= testPorts.length) || (path_idx >= testPaths.length) ||
+			   (query_idx >= testQueries.length) || (fragment_idx >= testFragments.length)) {
+		   return new ResultPair("Invalid Range", false);
+	   }
+	   else {
+		   String URLstring = testSchemas[schema_idx].item + testHosts[host_idx].item
+				   + testPorts[port_idx].item + testPaths[path_idx].item +
+				   testQueries[query_idx].item + testFragments[fragment_idx].item;
+		   
+		   boolean URLboolean = true;
+		   
+		   //Make URL, if any part false, false
+		   if (!testSchemas[schema_idx].valid || !testHosts[host_idx].valid
+				   || !testPorts[port_idx].valid || !testPaths[path_idx].valid
+				   || !testQueries[query_idx].valid || !testFragments[fragment_idx].valid){
+			   URLboolean = false;
+		   }
+		   
+		   ResultPair expectedURL = new ResultPair(URLstring, URLboolean);
+		   return expectedURL;  
+	   }
+   }
   
 	//Schemas
 	ResultPair[] testSchemas = {

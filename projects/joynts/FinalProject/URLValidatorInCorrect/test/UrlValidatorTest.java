@@ -1,7 +1,5 @@
 // Final Project CS 362
-
 import junit.framework.TestCase;
-import java.util.Random;
 
 public class UrlValidatorTest extends TestCase {
     
@@ -13,41 +11,49 @@ public class UrlValidatorTest extends TestCase {
     public void testIsValid()
     {
         UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-        Random rand = new Random();
         boolean URLboolean = false;
+        String[] array_str = {"testSchemas","testHosts","testPorts","testPaths","testQueries","testFragments"};
         
-        
-        for(int i=0;i<100000;i++)
+        for(int i=0;i<testSchemas.length;i++)
         {
-        	StringBuilder testBuffer = new StringBuilder();
-            int schemaIndex = rand.nextInt(testSchemas.length);
-            int hostIndex = rand.nextInt(testHosts.length);
-            int portIndex = rand.nextInt(testPorts.length);
-            int pathIndex = rand.nextInt(testPaths.length);
-            int queryIndex = rand.nextInt(testQueries.length);
-            int fragmentIndex = rand.nextInt(testFragments.length);
-            testBuffer.append(testSchemas[schemaIndex].item);
-            testBuffer.append(testHosts[hostIndex].item);
-            testBuffer.append(testPorts[portIndex].item);
-            testBuffer.append(testPaths[pathIndex].item);
-            testBuffer.append(testQueries[queryIndex].item);
-            testBuffer.append(testFragments[fragmentIndex].item);
+        	array_str[0] = testSchemas[i].item;
+        	
+        	for(int j=0; j<testHosts.length;j++)
+        	{
+        		array_str[1] = testHosts[j].item;
+        		
+        		for(int k=0; k<testPorts.length;k++)
+            	{
+            		array_str[2] = testPorts[k].item;
+            		
+            		for(int l=0; l<testPaths.length;l++)
+                	{
+                		array_str[3] = testPaths[l].item;
+                		
+                		for(int m=0; m<testQueries.length;m++)
+                    	{
+                    		array_str[4] = testQueries[m].item;
+                    		
+                    		for(int n=0; n<testFragments.length;n++)
+                        	{
+                        		array_str[5] = testFragments[n].item;
+                        		String URLstring = array_str[0] + array_str[1] + array_str[2] + array_str[3] + array_str[4]+ array_str[5];
+             
             
-            String URLstring = testBuffer.toString();
-        
+                        		if (testSchemas[i].valid && testHosts[j].valid && testPorts[k].valid && testPaths[l].valid && testQueries[m].valid && testFragments[n].valid){
+                        			URLboolean = true;
+                        		}
+                        		else{
+                        			URLboolean = false;
+                        		}
             
-            if (testSchemas[schemaIndex].valid && testHosts[hostIndex].valid
-            		&& testPorts[portIndex].valid && testPaths[pathIndex].valid
-            		&& testQueries[queryIndex].valid && testFragments[fragmentIndex].valid){
-                   URLboolean = true;
-              }
-            else{
-                URLboolean = false;
-            }
-            
-            System.out.println(String.format("Test #: %s",i ));
-            System.out.println(String.format("Generated url: %s. is valid: %s. And test is valid: %s.", URLstring, URLboolean,urlVal.isValid(URLstring)));
-            assertEquals(URLboolean, urlVal.isValid(URLstring));
+                        		System.out.println(String.format("Generated url: %s. is valid: %s. And test is valid: %s.", URLstring, URLboolean,urlVal.isValid(URLstring)));
+                        		assertEquals(URLboolean, urlVal.isValid(URLstring));
+                        	}
+                    	}
+                	}
+            	}
+        	}
         }
         
     }
@@ -73,10 +79,10 @@ public class UrlValidatorTest extends TestCase {
     };
     
     ResultPair[] testHosts = {
-    new ResultPair("www.amazon.com", true),
+    new ResultPair("www.apple.com", true),
     new ResultPair("www.google.com", true),
     new ResultPair("127.0.0.1", true),
-    new ResultPair("amazon.com", true),
+    new ResultPair("google.com", true),
     new ResultPair("flip.engr.oregonstate.edu", true),
     new ResultPair("www.cnn.com", true),
     new ResultPair("foo.gov", true),
@@ -86,23 +92,23 @@ public class UrlValidatorTest extends TestCase {
     new ResultPair("foo.mil", true),
     new ResultPair("foo.ai", true),
     new ResultPair("foo.bd", true),
-    new ResultPair("foo.bd", true),
+    new ResultPair("foo.vi", true),
     new ResultPair("user@foo.gov", true),
     new ResultPair("user:pass@foo.gov", true),
     new ResultPair("", false),
-    new ResultPair("amazon", false),
-    new ResultPair("amazon.", false),
-    new ResultPair(".amazon", false),
-    new ResultPair("www.amazon", false),
-    new ResultPair("amazon com", false),
-    new ResultPair("www.amazon_is_great.com", false),
-    new ResultPair("www.amazon-is-great!.com", false),
-    new ResultPair("www.amazon%20is%20great.com", false),
-    new ResultPair("127..0.1", false),
-    new ResultPair("127.1", false),
-    new ResultPair(".127.0.0.1", false),
-    new ResultPair("256.0.0.1", false),
-    new ResultPair("127", false)
+    new ResultPair("google", false),
+    new ResultPair("google.", false),
+    new ResultPair(".google", false),
+    new ResultPair("www.google", true),
+    new ResultPair("google com", false),
+    new ResultPair("www.google_great.com", false),
+    new ResultPair("www.google!.com", false),
+    new ResultPair("www.google%20is%20good.com", false),
+    new ResultPair("10..1.1", false),
+    new ResultPair("10.0", false),
+    new ResultPair(".10.0.1.1", false),
+    new ResultPair("10.0.1.1", true),
+    new ResultPair("10", false)
     };
     
     ResultPair[] testPorts = {

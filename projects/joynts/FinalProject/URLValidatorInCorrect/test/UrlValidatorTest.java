@@ -140,8 +140,8 @@ public class UrlValidatorTest extends TestCase {
     }
     
     ResultPair[] testSchemas = {
-    new ResultPair("http://", true),
     new ResultPair("https://", true),
+    new ResultPair("http://", true),
     new ResultPair("ftp://", true),
     new ResultPair("bob://", true),
     new ResultPair("ft.p://", true),

@@ -1,140 +1,189 @@
 // Final Project CS 362
+
 import junit.framework.TestCase;
 import java.util.Random;
 
 public class UrlValidatorTest extends TestCase {
-	
-	int NUM_TESTS = 1000;
-	
-	String[] validSchemes = new String[] {"http", "ftp", "https"};
-	String[] validAuthorities = new String[] {"www.amazon.com", "amazon.au", "255.255.255.255"};
-	String[] validPorts = new String[] {":80", ":655", ":0", ""};
-	String[] validPaths = new String[] {"/test", "/787841", "/test/", "", "/test/file"};
-	
-	String[] invalidSchemes = new String[] {"3ht://", "http:/", "http/", "://", "", "h3t://"};
-	String[] invalidAuthorities = new String[] {"amazon.ckaso", "", "aaa", "1.2.3.4.5"};
-	String[] invalidPorts = new String[] {":alkj", "80aewt", ":-5"};
-	String[] invalidPaths = new String[] {"//test", "/test//file", "/.../"};
-	
-	String[] queries = new String[] {"", "?action=view"};
-	
-	String[][] validPartitions = new String[][] {validSchemes, validAuthorities, validPorts, validPaths, queries};
-	String[][] invalidPartitions = new String[][] {invalidSchemes, invalidAuthorities, invalidPorts, invalidPaths, queries};
+    
+    int NUM_TESTS = 1000;
+    
+    String[] validSchemes = new String[] {"http", "ftp", "https"};
+    String[] validAuthorities = new String[] {"www.amazon.com", "amazon.au", "255.255.255.255"};
+    String[] validPorts = new String[] {":80", ":655", ":0", ""};
+    String[] validPaths = new String[] {"/test", "/787841", "/test/", "", "/test/file"};
+    
+    String[] invalidSchemes = new String[] {"3ht://", "http:/", "http/", "://", "", "h3t://"};
+    String[] invalidAuthorities = new String[] {"amazon.ckaso", "", "aaa", "1.2.3.4.5"};
+    String[] invalidPorts = new String[] {":alkj", "80aewt", ":-5"};
+    String[] invalidPaths = new String[] {"//test", "/test//file", "/.../"};
+    
+    String[] queries = new String[] {"", "?action=view"};
+    
+    String[][] validPartitions = new String[][] {validSchemes, validAuthorities, validPorts, validPaths, queries};
+    String[][] invalidPartitions = new String[][] {invalidSchemes, invalidAuthorities, invalidPorts, invalidPaths, queries};
     
     public UrlValidatorTest(String testName) {
         super(testName);
     }
-	
-	public void testManualTest01()
-   {
-	   // standard options
-	   UrlValidator urlVal = new UrlValidator();
-	   assertTrue(urlVal.isValid("http://www.google.com"));
-	   assertTrue(urlVal.isValid("http://www.google.com/index.html"));
-	   assertTrue(urlVal.isValid("http://www.google.com:80/index.html"));
-	   assertTrue(urlVal.isValid("http://www.google.com:80/home/index.html"));
-	   assertTrue(urlVal.isValid("https://www.google.com")); 
-	   assertTrue(urlVal.isValid("ftp://www.google.com"));
-	   assertTrue(urlVal.isValid("http://www.google.com/path.html#Fragment"));
-	   assertFalse(urlVal.isValid("http://www.google.com//path.html#Fragment"));
-	   assertFalse(urlVal.isValid("htttp://www.google.com/path.html#Fragment"));
-	   assertFalse(urlVal.isValid("www.google.com"));
-	   assertFalse(urlVal.isValid("http://google.com///index.html"));	 
-	   assertFalse(urlVal.isValid("ht://www.google.com/path.html#Fragment"));
-	   assertFalse(urlVal.isValid(null));
-   }
-   
-   public void testManualTest02()
-   {
-	   // Fragment testing
-	   UrlValidator urlVal = new UrlValidator(UrlValidator.NO_FRAGMENTS);
-	   assertTrue(urlVal.isValid("http://www.google.com/path.html"));
-	   assertFalse(urlVal.isValid("http://www.google.com/path.html#Fragment"));
-   }
-   
-   public void testYourPartitions()
-   {
-	 // Testing all valid URL partitions
-	   UrlValidator urlVal = new UrlValidator();
-	   Random rand = new Random();
-	   String partition;
-	   
-	   for (int i = 0; i < NUM_TESTS; i++) {
-		   StringBuilder url = new StringBuilder();
-		   for (int j = 0; j < validPartitions.length; j++) {
-			   // Use a random partition and create a new url
-			   partition = validPartitions[j][rand.nextInt(validPartitions[j].length)];
-			   url.append(partition);
-			   
-			   // check individual partitions for correctness.
-			   // isValidAuthority checks the combination of authority and port
-			   switch (j) {
-			   case 0:
-				   url.append("://");  // isValidScheme will fail if "://" is included
-				   assertTrue(urlVal.isValidScheme(partition));
-				   break;
-			   case 1:
-				   partition += validPartitions[2][rand.nextInt(validPartitions[2].length)]; // Add random port to the partition
-				   assertTrue(urlVal.isValidAuthority(partition));
-				   break;
-			   case 3:
-				   assertTrue(urlVal.isValidPath(partition));
-				   break;
-			   case 4:
-				   assertTrue(urlVal.isValidQuery(partition));
-				   break;
-			   }
-		   }
-		   assertTrue(urlVal.isValid(url.toString()));
-	   }
-   }
+    
+    public void testManualTest01()
+    {
+        // standard options
+        UrlValidator urlVal = new UrlValidator();
+        assertTrue(urlVal.isValid("http://www.google.com"));
+        assertTrue(urlVal.isValid("http://www.google.com/index.html"));
+        assertTrue(urlVal.isValid("http://www.google.com:80/index.html"));
+        assertTrue(urlVal.isValid("http://www.google.com:80/home/index.html"));
+        assertTrue(urlVal.isValid("https://www.google.com"));
+        assertTrue(urlVal.isValid("ftp://www.google.com"));
+        assertTrue(urlVal.isValid("http://www.google.com/path.html#Fragment"));
+        assertFalse(urlVal.isValid("http://www.google.com//path.html#Fragment"));
+        assertFalse(urlVal.isValid("htttp://www.google.com/path.html#Fragment"));
+        assertFalse(urlVal.isValid("www.google.com"));
+        assertFalse(urlVal.isValid("http://google.com///index.html"));
+        assertFalse(urlVal.isValid("ht://www.google.com/path.html#Fragment"));
+        assertFalse(urlVal.isValid("http://www.google.com/////path/////"));
+        assertFalse(urlVal.isValid("http://localhost/path.html"));
+        assertFalse(urlVal.isValid(null));
+    }
+    
+    public void testPartitionTest01()
+    {
+        // Fragment testing
+        UrlValidator urlVal = new UrlValidator(UrlValidator.NO_FRAGMENTS);
+        assertTrue(urlVal.isValid("http://www.google.com/path.html"));
+        assertFalse(urlVal.isValid("http://www.google.com/path.html#Fragment"));
+    }
+    
+    public void testPartitionTest02()
+    {
+        // Fragment testing
+        UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_2_SLASHES);
+        assertTrue(urlVal.isValid("http://www.google.com/path.html"));
+        assertTrue(urlVal.isValid("http://www.google.com//path"));
+        assertTrue(urlVal.isValid("http://www.google.com///path///"));
+        assertTrue(urlVal.isValid("http://www.google.com/////path/////"));
+    }
+    
+    public void testPartitionTest03()
+    {
+        // Fragment testing
+        UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_LOCAL_URLS);
+        assertTrue(urlVal.isValid("http://localhost/"));
+        assertTrue(urlVal.isValid("http://machine/"));
+        assertTrue(urlVal.isValid("http://localhost/path.html"));
+    }
+    
+    public void testPartitionTest04()
+    {
+        // Fragment testing
+        UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+        assertTrue(urlVal.isValid("asdlkfnzlewru://google.com"));
+        assertFalse(urlVal.isValid("google.com"));
+        assertFalse(urlVal.isValid("3441foo://google.com"));
+    }
+    
+    public void testRandomPartitions()
+    {
+        // Testing all valid URL partitions
+        UrlValidator urlVal = new UrlValidator();
+        Random rand = new Random();
+        String partition;
+        
+        for (int i = 0; i < NUM_TESTS; i++) {
+            StringBuilder url = new StringBuilder();
+            for (int j = 0; j < validPartitions.length; j++) {
+                // Use a random partition and create a new url
+                partition = validPartitions[j][rand.nextInt(validPartitions[j].length)];
+                url.append(partition);
+                
+                // check individual partitions for correctness.
+                // isValidAuthority checks the combination of authority and port
+                switch (j) {
+                    case 0:
+                        url.append("://");  // isValidScheme will fail if "://" is included
+                        assertTrue(urlVal.isValidScheme(partition));
+                        break;
+                    case 1:
+                        partition += validPartitions[2][rand.nextInt(validPartitions[2].length)]; // Add random port to the partition
+                        assertTrue(urlVal.isValidAuthority(partition));
+                        break;
+                    case 3:
+                        assertTrue(urlVal.isValidPath(partition));
+                        break;
+                    case 4:
+                        assertTrue(urlVal.isValidQuery(partition));
+                        break;
+                }
+            }
+            assertTrue(urlVal.isValid(url.toString()));
+        }
+    }
+    
+    public void testIndividualPartitions()
+    {
+        // Testing single component failures
+        UrlValidator urlVal = new UrlValidator();
+        
+        String badScheme = invalidSchemes[0] + validAuthorities[0] + validPorts[0] + validPaths[0] + queries[0];
+        assertFalse(urlVal.isValid(badScheme));
+        
+        String badAuthority = validSchemes[0] + invalidAuthorities[0] + validPorts[0] + validPaths[0] + queries[0];
+        assertFalse(urlVal.isValid(badAuthority));
+        
+        String badPort = validSchemes[0] + validAuthorities[0] + invalidPorts[0] + validPaths[0] + queries[0];
+        assertFalse(urlVal.isValid(badPort));
+        
+        String badPath = validSchemes[0] + validAuthorities[0] + validPorts[0] + invalidPaths[0] + queries[0];
+        assertFalse(urlVal.isValid(badPath));
+    }
     
     public void testIsValid()
     {
         UrlValidator urlVal = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
-        boolean URLboolean = false;
+        boolean expectedIsValid = false;
         String[] array_str = {"testSchemas","testHosts","testPorts","testPaths","testQueries","testFragments"};
         
         for(int i=0;i<testSchemas.length;i++)
         {
-        	array_str[0] = testSchemas[i].item;
-        	
-        	for(int j=0; j<testHosts.length;j++)
-        	{
-        		array_str[1] = testHosts[j].item;
-        		
-        		for(int k=0; k<testPorts.length;k++)
-            	{
-            		array_str[2] = testPorts[k].item;
-            		
-            		for(int l=0; l<testPaths.length;l++)
-                	{
-                		array_str[3] = testPaths[l].item;
-                		
-                		for(int m=0; m<testQueries.length;m++)
-                    	{
-                    		array_str[4] = testQueries[m].item;
-                    		
-                    		for(int n=0; n<testFragments.length;n++)
-                        	{
-                        		array_str[5] = testFragments[n].item;
-                        		String URLstring = array_str[0] + array_str[1] + array_str[2] + array_str[3] + array_str[4]+ array_str[5];
-             
+            array_str[0] = testSchemas[i].item;
             
-                        		if (testSchemas[i].valid && testHosts[j].valid && testPorts[k].valid && testPaths[l].valid && testQueries[m].valid && testFragments[n].valid){
-                        			URLboolean = true;
-                        		}
-                        		else{
-                        			URLboolean = false;
-                        		}
-            
-                        		System.out.println(String.format("Generated url: %s. is valid: %s. And test is valid: %s.", URLstring, URLboolean,urlVal.isValid(URLstring)));
-                        		assertEquals(URLboolean, urlVal.isValid(URLstring));
-                        	}
-                    	}
-                	}
-            	}
-        	}
+            for(int j=0; j<testHosts.length;j++)
+            {
+                array_str[1] = testHosts[j].item;
+                
+                for(int k=0; k<testPorts.length;k++)
+                {
+                    array_str[2] = testPorts[k].item;
+                    
+                    for(int l=0; l<testPaths.length;l++)
+                    {
+                        array_str[3] = testPaths[l].item;
+                        
+                        for(int m=0; m<testQueries.length;m++)
+                        {
+                            array_str[4] = testQueries[m].item;
+                            
+                            for(int n=0; n<testFragments.length;n++)
+                            {
+                                array_str[5] = testFragments[n].item;
+                                String URLstring = array_str[0] + array_str[1] + array_str[2] + array_str[3] + array_str[4]+ array_str[5];
+                                
+                                
+                                if (testSchemas[i].valid && testHosts[j].valid && testPorts[k].valid && testPaths[l].valid && testQueries[m].valid && testFragments[n].valid){
+                                    expectedIsValid = true;
+                                }
+                                else{
+                                    expectedIsValid = false;
+                                }
+                                
+                                System.out.println(String.format("Generated url: \"%s\" - Expected Validity: %s - URLValidator Returned Validity: %s.", URLstring, expectedIsValid, urlVal.isValid(URLstring)));
+                                assertEquals(expectedIsValid, urlVal.isValid(URLstring));
+                            }
+                        }
+                    }
+                }
+            }
         }
         
     }
@@ -229,7 +278,4 @@ public class UrlValidatorTest extends TestCase {
     new ResultPair("#top..bottom", true),
     new ResultPair("#123", true)
     };
-    
-    
-    
 }
